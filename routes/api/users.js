@@ -31,9 +31,6 @@ router.post('/', [
 	try {
 		// See if user exists
 		let user = await User.findOne({email});
-
-		console.log(JSON.stringify(user));
-
 		if (user) {
 			return res.status(400).json({errors: [{msg: 'User already exists'}]});
 		}
@@ -48,6 +45,7 @@ router.post('/', [
 
 		// Save User
 		await user.save();
+		console.log(JSON.stringify(user));
 
 		// Return jsonwebtoken
 		const payload = {
